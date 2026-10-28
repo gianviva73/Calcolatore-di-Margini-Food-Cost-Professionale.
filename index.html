@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcolatore Margini & Food Cost - Digital Creator Lab</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & JetBrains Mono -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FFFFFF;
+            color: #111111;
+        }
+        .font-mono-custom {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .editorial-shadow {
+            box-shadow: 4px 4px 0px 0px #111111;
+        }
+        .editorial-shadow-orange {
+            box-shadow: 4px 4px 0px 0px #FF6B00;
+        }
+        .editorial-border {
+            border: 2px solid #111111;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-[#FF6B00] selection:text-white">
+
+    <!-- Top Navigation Bar / Manual Header -->
+    <header class="w-full border-b-2 border-black py-4 px-4 sm:px-8 bg-white sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto flex flex-wrap justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <span class="bg-black text-white font-mono-custom text-xs sm:text-sm px-3 py-1 font-bold tracking-wider">CAPITOLO 48</span>
+                <span class="text-xs sm:text-sm font-bold uppercase tracking-widest text-neutral-600">EDIZIONE CREATOR LAB</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <!-- Pulsante Guida Header -->
+                <button id="openGuideBtnHeader" class="bg-white hover:bg-neutral-100 text-black font-extrabold text-xs sm:text-sm px-3 py-1 uppercase border-2 border-black editorial-shadow flex items-center gap-1.5 transition-all">
+                    <span>📖</span> GUIDA UTENTE
+                </button>
+                <span class="bg-[#FF6B00] text-white font-mono-custom text-xs sm:text-sm px-3 py-1 font-extrabold tracking-wider uppercase border-2 border-black editorial-shadow">100% TESTATO</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-4xl w-full mx-auto px-4 sm:px-6 py-8 sm:py-12 flex-grow">
+        
+        <!-- Title & Subtitle Section -->
+        <div class="mb-10 text-center sm:text-left flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+            <div>
+                <div class="inline-block mb-3">
+                    <span class="text-xs font-bold tracking-widest text-[#FF6B00] uppercase border-b-2 border-[#FF6B00] pb-1">MANUALE PRATICO DIGITALE</span>
+                </div>
+                <h1 class="text-4xl sm:text-6xl font-black uppercase tracking-tight text-[#111111] mb-2">
+                    CALCOLO MARGINI & <span class="text-[#FF6B00]">FOOD COST</span>
+                </h1>
+                <p class="text-neutral-600 text-base sm:text-lg max-w-2xl font-medium">
+                    Ottimizza i prezzi dei tuoi prodotti, analizza i costi di produzione in tempo reale e monitora la sostenibilità del tuo business con indicatori di performance automatici.
+                </p>
+            </div>
+        </div>
+
+        <!-- Calculator Grid Layout -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
+            <!-- Input Section (Left 7 Columns) -->
+            <div class="lg:col-span-7 editorial-border bg-white p-6 sm:p-8 editorial-shadow">
+                <div class="flex items-center justify-between mb-6 pb-4 border-b-2 border-black">
+                    <h2 class="text-xl font-extrabold uppercase tracking-wide flex items-center gap-2">
+                        <span class="w-3 h-3 bg-[#FF6B00] inline-block border border-black"></span>
+                        Parametri di Ingresso
+                    </h2>
+                    <button id="openGuideBtn" class="text-xs font-bold uppercase text-[#FF6B00] hover:underline flex items-center gap-1">
+                        <span>❓</span> Come Usare
+                    </button>
+                </div>
+
+                <div class="space-y-6">
+                    <!-- Costo Produzione / Materia Prima -->
+                    <div>
+                        <label for="prodCost" class="block text-sm font-bold uppercase tracking-wide mb-2">
+                            Costo di Produzione / Materia Prima (€)
+                        </label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none font-bold text-neutral-500">€</span>
+                            <input type="number" id="prodCost" value="5.50" step="0.01" min="0" 
+                                class="w-full pl-9 pr-4 py-3 editorial-border font-mono-custom text-lg font-bold bg-neutral-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#FF6B00]">
+                        </div>
+                        <p class="text-xs text-neutral-500 mt-1">Costo totale degli ingredienti o dei materiali impiegati.</p>
+                    </div>
+
+                    <!-- Prezzo di Vendita al Pubblico -->
+                    <div>
+                        <label for="sellPrice" class="block text-sm font-bold uppercase tracking-wide mb-2">
+                            Prezzo di Vendita al Pubblico (€)
+                        </label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none font-bold text-neutral-500">€</span>
+                            <input type="number" id="sellPrice" value="22.00" step="0.01" min="0" 
+                                class="w-full pl-9 pr-4 py-3 editorial-border font-mono-custom text-lg font-bold bg-neutral-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#FF6B00]">
+                        </div>
+                        <p class="text-xs text-neutral-500 mt-1">Prezzo finale applicato al cliente IVA inclusa/esclusa.</p>
+                    </div>
+
+                    <!-- Percentuale di Scarto / Spreco (Opzionale) -->
+                    <div>
+                        <label for="wastePercent" class="block text-sm font-bold uppercase tracking-wide mb-2">
+                            Percentuale di Scarto / Spreco (%) <span class="text-xs font-normal text-neutral-500">[Opzionale]</span>
+                        </label>
+                        <div class="relative">
+                            <input type="number" id="wastePercent" value="5" step="0.5" min="0" max="100" 
+                                class="w-full px-4 py-3 editorial-border font-mono-custom text-lg font-bold bg-neutral-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#FF6B00]">
+                            <span class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none font-bold text-neutral-500">%</span>
+                        </div>
+                        <p class="text-xs text-neutral-500 mt-1">Margine di sicurezza per calo peso o scarti di lavorazione.</p>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="pt-4 flex flex-col sm:flex-row gap-4">
+                        <button id="resetBtn" class="flex-1 bg-neutral-100 hover:bg-neutral-200 text-black font-extrabold uppercase py-3 px-4 editorial-border transition-all duration-150 active:translate-y-0.5">
+                            Resetta Valori
+                        </button>
+                        <button id="copyBtn" class="flex-1 bg-[#FF6B00] hover:bg-[#e05e00] text-white font-extrabold uppercase py-3 px-4 editorial-border editorial-shadow transition-all duration-150 active:translate-y-0.5">
+                            Copia Risultati
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Output & Semaforo Section (Right 5 Columns) -->
+            <div class="lg:col-span-5 editorial-border bg-neutral-900 text-white p-6 sm:p-8 editorial-shadow-orange flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between mb-6 pb-4 border-b-2 border-neutral-700">
+                        <h2 class="text-xl font-extrabold uppercase tracking-wide flex items-center gap-2 text-white">
+                            <span class="w-3 h-3 bg-emerald-400 inline-block border border-black" id="semaforoDot"></span>
+                            Indicatori & Output
+                        </h2>
+                        <span class="text-xs font-mono-custom text-[#FF6B00] font-bold">LIVE STATS</span>
+                    </div>
+
+                    <!-- Semaforo Status Badge -->
+                    <div id="statusBadge" class="mb-6 p-4 editorial-border bg-emerald-500/10 border-emerald-500 text-emerald-400 flex items-center gap-3">
+                        <div id="statusIndicatorIcon" class="w-4 h-4 rounded-full bg-emerald-500 animate-pulse"></div>
+                        <div>
+                            <div class="text-xs font-bold uppercase tracking-wider text-neutral-400">Stato Margine</div>
+                            <div id="statusText" class="text-base font-extrabold uppercase tracking-wide">ECCELLENTE (>70%)</div>
+                        </div>
+                    </div>
+
+                    <!-- Metrics Display List -->
+                    <div class="space-y-4">
+                        <div class="bg-neutral-800 p-4 editorial-border border-neutral-700 flex justify-between items-center">
+                            <div>
+                                <span class="text-xs text-neutral-400 uppercase font-bold block">Margine in Euro</span>
+                                <span class="text-xs text-neutral-500 font-mono-custom">Utile netto unitario</span>
+                            </div>
+                            <span id="outProfitEuro" class="text-2xl font-black font-mono-custom text-[#FF6B00]">€0.00</span>
+                        </div>
+
+                        <div class="bg-neutral-800 p-4 editorial-border border-neutral-700 flex justify-between items-center">
+                            <div>
+                                <span class="text-xs text-neutral-400 uppercase font-bold block">Margine Percentuale</span>
+                                <span class="text-xs text-neutral-500 font-mono-custom">(Utile / Prezzo)</span>
+                            </div>
+                            <span id="outMarginPercent" class="text-2xl font-black font-mono-custom text-white">0%</span>
+                        </div>
+
+                        <div class="bg-neutral-800 p-4 editorial-border border-neutral-700 flex justify-between items-center">
+                            <div>
+                                <span class="text-xs text-neutral-400 uppercase font-bold block">Markup (Ricarico)</span>
+                                <span class="text-xs text-neutral-500 font-mono-custom">(Utile / Costo)</span>
+                            </div>
+                            <span id="outMarkupPercent" class="text-2xl font-black font-mono-custom text-white">0%</span>
+                        </div>
+
+                        <div class="bg-neutral-800 p-4 editorial-border border-neutral-700 flex justify-between items-center">
+                            <div>
+                                <span class="text-xs text-neutral-400 uppercase font-bold block">Costo Effettivo (+Scarto)</span>
+                                <span class="text-xs text-neutral-500 font-mono-custom">Costo con spreco</span>
+                            </div>
+                            <span id="outEffectiveCost" class="text-lg font-bold font-mono-custom text-neutral-300">€0.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 pt-4 border-t border-neutral-700 text-xs text-neutral-400 text-center font-mono-custom">
+                    DIGITAL CREATOR LAB © 2026 • FORMULA VERIFICATA
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Custom Toast Notification Box -->
+    <div id="toast" class="fixed bottom-6 right-6 bg-black text-white px-6 py-3 editorial-border editorial-shadow font-bold text-sm transform translate-y-24 opacity-0 transition-all duration-300 z-50 flex items-center gap-3">
+        <span class="w-2.5 h-2.5 bg-[#FF6B00] rounded-full inline-block"></span>
+        <span id="toastMessage">Risultati copiati negli appunti!</span>
+    </div>
+
+    <!-- MODALE GUIDA UTENTE (EDITORIAL STYLE) -->
+    <div id="guideModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-200">
+        <div id="guideModalContainer" class="bg-white max-w-2xl w-full max-h-[85vh] overflow-y-auto editorial-border editorial-shadow p-6 sm:p-8 transform scale-95 transition-transform duration-200 flex flex-col justify-between">
+            <div>
+                <!-- Modal Header -->
+                <div class="flex justify-between items-center pb-4 mb-6 border-b-2 border-black">
+                    <div class="flex items-center gap-2">
+                        <span class="bg-[#FF6B00] text-white font-mono-custom text-xs px-2 py-0.5 font-black uppercase">ISTRUZIONI</span>
+                        <h3 class="text-2xl font-black uppercase tracking-tight text-black">GUIDA ALL'USO DEL CALCOLATORE</h3>
+                    </div>
+                    <button id="closeGuideBtn" class="w-8 h-8 bg-black text-white hover:bg-[#FF6B00] font-black text-lg editorial-border flex items-center justify-center transition-colors">
+                        ✕
+                    </button>
+                </div>
+
+                <!-- Modal Body / Content -->
+                <div class="space-y-6 text-neutral-800 text-sm">
+                    
+                    <!-- Section 1: Inserimento Dati -->
+                    <div class="border-l-4 border-black pl-4 py-1">
+                        <h4 class="font-extrabold uppercase text-base text-black mb-1">1. Inserimento dei Parametri di Ingresso</h4>
+                        <ul class="space-y-2 text-neutral-700">
+                            <li><strong>• Costo di Produzione / Materia Prima (€):</strong> Inserisci il costo complessivo sostenuto per realizzare l'unita del prodotto (es. materie prime, packaging primario o costi diretti).</li>
+                            <li><strong>• Prezzo di Vendita (€):</strong> Inserisci il prezzo al pubblico a cui intendi proporre il prodotto o piatto.</li>
+                            <li><strong>• Percentuale di Scarto (%):</strong> [Opzionale] Indica il margine di calo peso o spreco di lavorazione (es. 5% per pulizia verdure/carni o scarti di taglio). Il calcolatore aumenterà automaticamente il costo effettivo.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Section 2: Spiegazione Metriche -->
+                    <div class="border-l-4 border-[#FF6B00] pl-4 py-1">
+                        <h4 class="font-extrabold uppercase text-base text-black mb-1">2. Come Leggere i Risultati</h4>
+                        <ul class="space-y-2 text-neutral-700">
+                            <li><strong>• Margine in Euro (€):</strong> Guadagno netto in denaro per ogni unità venduta <span class="font-mono-custom font-bold text-black">(Prezzo - Costo Effettivo)</span>.</li>
+                            <li><strong>• Margine Percentuale (%):</strong> La percentuale del prezzo finale che costituisce vero profitto netto.</li>
+                            <li><strong>• Markup / Ricarico (%):</strong> La percentuale applicata sopra il costo di produzione per fissare il prezzo di vendita.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Section 3: Sistema a Semaforo -->
+                    <div class="border-l-4 border-emerald-500 pl-4 py-1 bg-neutral-50 p-3 editorial-border">
+                        <h4 class="font-extrabold uppercase text-base text-black mb-2">3. Significato degli Indicatori a Semaforo</h4>
+                        <div class="space-y-2">
+                            <div class="flex items-center gap-2">
+                                <span class="w-3.5 h-3.5 rounded-full bg-emerald-500 border border-black inline-block"></span>
+                                <span class="font-extrabold text-emerald-700 uppercase text-xs">VERDE (> 70% Margine):</span>
+                                <span class="text-xs font-medium">Margine eccellente. Il prodotto garantisce un'ottima redditività.</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="w-3.5 h-3.5 rounded-full bg-amber-400 border border-black inline-block"></span>
+                                <span class="font-extrabold text-amber-700 uppercase text-xs">ARANCIONE (50% - 70%):</span>
+                                <span class="text-xs font-medium">Margine sufficiente ma da ottimizzare riducendo i costi o ritoccando il prezzo.</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="w-3.5 h-3.5 rounded-full bg-rose-500 border border-black inline-block"></span>
+                                <span class="font-extrabold text-rose-700 uppercase text-xs">ROSSO (< 50%):</span>
+                                <span class="text-xs font-medium">Margine basso o critico. Rischio di mancata copertura dei costi fissi.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="mt-8 pt-4 border-t-2 border-black flex justify-between items-center">
+                <span class="text-xs font-mono-custom text-neutral-500">Premi ESC o clicca fuori per chiudere</span>
+                <button id="closeGuideBtnFooter" class="bg-black hover:bg-[#FF6B00] text-white font-extrabold uppercase text-xs py-2.5 px-6 editorial-border transition-colors">
+                    Ho Capito
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="w-full border-t-2 border-black bg-white py-6 px-4 text-center">
+        <p class="text-xs font-bold uppercase tracking-widest text-neutral-700">
+            Digital Creator Lab • Strumenti Professionali per Creator & Imprenditori
+        </p>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        const prodCostInput = document.getElementById('prodCost');
+        const sellPriceInput = document.getElementById('sellPrice');
+        const wastePercentInput = document.getElementById('wastePercent');
+        
+        const outProfitEuro = document.getElementById('outProfitEuro');
+        const outMarginPercent = document.getElementById('outMarginPercent');
+        const outMarkupPercent = document.getElementById('outMarkupPercent');
+        const outEffectiveCost = document.getElementById('outEffectiveCost');
+        
+        const statusBadge = document.getElementById('statusBadge');
+        const statusIndicatorIcon = document.getElementById('statusIndicatorIcon');
+        const statusText = document.getElementById('statusText');
+        const semaforoDot = document.getElementById('semaforoDot');
+        
+        const resetBtn = document.getElementById('resetBtn');
+        const copyBtn = document.getElementById('copyBtn');
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toastMessage');
+
+        // Modal Elements
+        const guideModal = document.getElementById('guideModal');
+        const guideModalContainer = document.getElementById('guideModalContainer');
+        const openGuideBtnHeader = document.getElementById('openGuideBtnHeader');
+        const openGuideBtn = document.getElementById('openGuideBtn');
+        const closeGuideBtn = document.getElementById('closeGuideBtn');
+        const closeGuideBtnFooter = document.getElementById('closeGuideBtnFooter');
+
+        function openModal() {
+            guideModal.classList.remove('opacity-0', 'pointer-events-none');
+            guideModalContainer.classList.remove('scale-95');
+            guideModalContainer.classList.add('scale-100');
+            document.body.style.overflow = 'hidden'; // Blocco scroll sotto
+        }
+
+        function closeModal() {
+            guideModal.classList.add('opacity-0', 'pointer-events-none');
+            guideModalContainer.classList.remove('scale-100');
+            guideModalContainer.classList.add('scale-95');
+            document.body.style.overflow = ''; // Ripristina scroll
+        }
+
+        // Modal Event Listeners
+        openGuideBtnHeader.addEventListener('click', openModal);
+        openGuideBtn.addEventListener('click', openModal);
+        closeGuideBtn.addEventListener('click', closeModal);
+        closeGuideBtnFooter.addEventListener('click', closeModal);
+
+        // Click outside modal container to close
+        guideModal.addEventListener('click', (e) => {
+            if (!guideModalContainer.contains(e.target)) {
+                closeModal();
+            }
+        });
+
+        // ESC key to close modal
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !guideModal.classList.contains('pointer-events-none')) {
+                closeModal();
+            }
+        });
+
+        function calculate() {
+            const rawCost = parseFloat(prodCostInput.value) || 0;
+            const sellPrice = parseFloat(sellPriceInput.value) || 0;
+            const waste = parseFloat(wastePercentInput.value) || 0;
+
+            // Effective cost including waste percentage
+            const effectiveCost = rawCost * (1 + (waste / 100));
+            const profitEuro = sellPrice - effectiveCost;
+            
+            let marginPercent = 0;
+            let markupPercent = 0;
+
+            if (sellPrice > 0) {
+                marginPercent = (profitEuro / sellPrice) * 100;
+            }
+
+            if (effectiveCost > 0) {
+                markupPercent = (profitEuro / effectiveCost) * 100;
+            }
+
+            // Update DOM outputs
+            outProfitEuro.textContent = `€${profitEuro.toFixed(2)}`;
+            outMarginPercent.textContent = `${marginPercent.toFixed(1)}%`;
+            outMarkupPercent.textContent = `${markupPercent.toFixed(1)}%`;
+            outEffectiveCost.textContent = `€${effectiveCost.toFixed(2)}`;
+
+            // Traffic Light Logic
+            // VERDE = Margine Eccellente > 70%
+            // ARANCIONE = Margine da Ottimizzare 50% - 70%
+            // ROSSO = Margine Insufficiente < 50%
+            
+            statusBadge.className = "mb-6 p-4 editorial-border flex items-center gap-3 transition-colors duration-300";
+            
+            if (marginPercent >= 70) {
+                statusBadge.classList.add('bg-emerald-500/10', 'border-emerald-500', 'text-emerald-400');
+                statusIndicatorIcon.className = "w-4 h-4 rounded-full bg-emerald-500 animate-pulse";
+                semaforoDot.className = "w-3 h-3 bg-emerald-400 inline-block border border-black";
+                statusText.textContent = "ECCELLENTE (>70%)";
+            } else if (marginPercent >= 50 && marginPercent < 70) {
+                statusBadge.classList.add('bg-amber-500/10', 'border-amber-500', 'text-amber-400');
+                statusIndicatorIcon.className = "w-4 h-4 rounded-full bg-amber-500 animate-pulse";
+                semaforoDot.className = "w-3 h-3 bg-amber-400 inline-block border border-black";
+                statusText.textContent = "DA OTTIMIZZARE (50-70%)";
+            } else {
+                statusBadge.classList.add('bg-rose-500/10', 'border-rose-500', 'text-rose-400');
+                statusIndicatorIcon.className = "w-4 h-4 rounded-full bg-rose-500 animate-pulse";
+                semaforoDot.className = "w-3 h-3 bg-rose-500 inline-block border border-black";
+                statusText.textContent = "CRITICO / INSUFFICIENTE (<50%)";
+            }
+        }
+
+        // Event Listeners for real-time calculation
+        prodCostInput.addEventListener('input', calculate);
+        sellPriceInput.addEventListener('input', calculate);
+        wastePercentInput.addEventListener('input', calculate);
+
+        // Reset Button
+        resetBtn.addEventListener('click', () => {
+            prodCostInput.value = "5.50";
+            sellPriceInput.value = "22.00";
+            wastePercentInput.value = "5";
+            calculate();
+            showToast("Valori ripristinati con successo!");
+        });
+
+        // Copy Button using execCommand fallback compatibility
+        copyBtn.addEventListener('click', () => {
+            const rawCost = parseFloat(prodCostInput.value) || 0;
+            const sellPrice = parseFloat(sellPriceInput.value) || 0;
+            const waste = parseFloat(wastePercentInput.value) || 0;
+            const effectiveCost = rawCost * (1 + (waste / 100));
+            const profitEuro = sellPrice - effectiveCost;
+            let marginPercent = sellPrice > 0 ? (profitEuro / sellPrice) * 100 : 0;
+            let markupPercent = effectiveCost > 0 ? (profitEuro / effectiveCost) * 100 : 0;
+
+            const textToCopy = `📊 DIGITAL CREATOR LAB - REPORT MARGINI & FOOD COST\n` +
+                               `- Costo Produzione: €${rawCost.toFixed(2)}\n` +
+                               `- Prezzo Vendita: €${sellPrice.toFixed(2)}\n` +
+                               `- Scarto: ${waste}%\n` +
+                               `- Utile Netto: €${profitEuro.toFixed(2)}\n` +
+                               `- Margine: ${marginPercent.toFixed(1)}%\n` +
+                               `- Markup: ${markupPercent.toFixed(1)}%`;
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    showToast("Report copiato negli appunti!");
+                }).catch(() => {
+                    fallbackCopyText(textToCopy);
+                });
+            } else {
+                fallbackCopyText(textToCopy);
+            }
+        });
+
+        function fallbackCopyText(text) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed";  // Avoid scrolling to bottom
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    showToast("Report copiato negli appunti!");
+                } else {
+                    showToast("Impossibile copiare.");
+                }
+            } catch (err) {
+                showToast("Errore durante la copia.");
+            }
+            document.body.removeChild(textArea);
+        }
+
+        function showToast(msg) {
+            toastMessage.textContent = msg;
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-24', 'opacity-0');
+            }, 3000);
+        }
+
+        // Initial calculation on load
+        window.onload = function() {
+            calculate();
+        };
+    </script>
+</body>
+</html>
